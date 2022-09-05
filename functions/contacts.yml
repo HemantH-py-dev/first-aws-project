@@ -1,4 +1,4 @@
-name: ${self:service}-contacts-${self:provider.stage}
+name: ${self:service}-contacts
 handler: lambda_function.lambda_handler
 module: contacts
 
