@@ -1,0 +1,76 @@
+name: ${self:service}-contacts-${self:provider.stage}
+handler: lambda_function.lambda_handler
+module: contacts
+
+package:
+  include:
+    - contacts/**
+events:
+  - http:
+      path: /user/contacts
+      method: post
+      cors: true
+      integration: lambda
+      request:
+        passThrough: WHEN_NO_MATCH
+        template:
+          application/json: '{
+            "action": "create",
+            "user_id": "$input.params("user_id")",
+            "body": $input.json("$")
+            }'
+      response:
+        headers:
+          Access-Control-Allow-Origin: "'*'"
+  - http:
+      path: /user/contacts
+      method: get
+      cors: true
+      # authorizer: ${file(./Resources/authorizer.yml)}
+      integration: lambda
+      request:
+        passThrough: WHEN_NO_MATCH
+        template:
+          application/json: '{
+            "action": "get"
+            "contact_id": "$input.params("contact_id")",
+            "user_id": "$input.params("user_id")",
+            }'
+      response:
+        headers:
+          Access-Control-Allow-Origin: "'*'"
+  - http:
+      path: /user/contacts/{contact_id}
+      method: put
+      cors: true
+      integration: lambda
+      request:
+        passThrough: WHEN_NO_MATCH
+        template:
+          application/json: '{
+            "action": "update",
+            "user_id": "$input.params("user_id")",
+            "contact_id": "$input.params("contact_id")",
+            "body": $input.json("$")
+            }'
+      response:
+        headers:
+          Access-Control-Allow-Origin: "'*'"
+  - http:
+      path: /user/contacts/{contact_id}
+      method: delete
+      cors: true
+      integration: lambda
+      request:
+        passThrough: WHEN_NO_MATCH
+        template:
+          application/json: '{
+            "action": "delete"
+            "user_id": "$input.params("user_id")",
+            "contact_id": "$input.params("contact_id")",
+            }'
+      response:
+        headers:
+          Access-Control-Allow-Origin: "'*'"
+environment:
+ CONTACTS_TABLE: Contacts

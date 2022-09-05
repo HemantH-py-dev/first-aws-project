@@ -1,0 +1,31 @@
+service: hemanth
+useDotenv: true
+
+
+provider:
+  name: aws
+  deploymentMethod: direct
+  stage: ${opt:stage, "dev"}
+  region: ${opt:region, "us-east-1"}
+  memorySize: 1024
+  timeout: 30
+  runtime: python3.8 
+
+
+package:
+  individually: true
+  patterns:
+    - "!node_modules/**"
+    - "!requirements.txt"
+    - "!package.json"
+
+
+plugins:
+  - serverless-python-requirements
+  - serverless-plugin-split-stacks
+
+
+functions:
+  contacts: ${file(./functions/contacts.yml)}
+
+
