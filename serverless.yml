@@ -26,6 +26,81 @@ package:
 
 
 functions:
-  contacts: ${file(./functions/contacts.yml)}
+  contacts:
+    handler: lambda_function.lambda_handler
+    module: contacts
+    package:
+      include:
+        - contacts/lambda_function.py
+        - contacts/contacts_api.py
+        - contacts/lambda_responses.py
+    events:
+      - http:
+          path: /user/contacts
+          method: post
+          cors: true
+          integration: lambda
+          request:
+            passThrough: WHEN_NO_MATCH
+            template:
+              application/json: '{
+                "action": "create",
+                "user_id": "$input.params("user_id")",
+                "body": $input.json("$")
+                }'
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+      - http:
+          path: /user/contacts
+          method: get
+          cors: true
+          integration: lambda
+          request:
+            passThrough: WHEN_NO_MATCH
+            template:
+              application/json: '{
+                "action": "get"
+                "contact_id": "$input.params("contact_id")",
+                "user_id": "$input.params("user_id")",
+                }'
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+      - http:
+          path: /user/contacts/{contact_id}
+          method: put
+          cors: true
+          integration: lambda
+          request:
+            passThrough: WHEN_NO_MATCH
+            template:
+              application/json: '{
+                "action": "update",
+                "user_id": "$input.params("user_id")",
+                "contact_id": "$input.params("contact_id")",
+                "body": $input.json("$")
+                }'
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+      - http:
+          path: /user/contacts/{contact_id}
+          method: delete
+          cors: true
+          integration: lambda
+          request:
+            passThrough: WHEN_NO_MATCH
+            template:
+              application/json: '{
+                "action": "delete"
+                "user_id": "$input.params("user_id")",
+                "contact_id": "$input.params("contact_id")",
+                }'
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+  environment:
+    CONTACTS_TABLE: Contacts
 
 
