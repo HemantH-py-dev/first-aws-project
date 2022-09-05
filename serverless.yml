@@ -20,9 +20,9 @@ package:
     - "!package.json"
 
 
-plugins:
-  - serverless-python-requirements
-  - serverless-plugin-split-stacks
+# plugins:
+#   - serverless-python-requirements
+#   - serverless-plugin-split-stacks
 
 
 functions:
