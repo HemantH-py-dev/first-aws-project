@@ -1,11 +1,10 @@
-import os
 from uuid import uuid4
 from datetime import datetime
 
 import boto3
 from boto3.dynamodb.conditions import Key
 
-from lambda_responses import bad_request, create_response, delete_response, get_response, internal_server_error, update_response
+from .lambda_responses import bad_request, create_response, delete_response, get_response, internal_server_error, update_response
 
 CONTACTS_TABLE_NAME = "Contacts"
 CONTACTS = boto3.resource("dynamodb").Table(CONTACTS_TABLE_NAME)

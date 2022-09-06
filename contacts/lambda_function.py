@@ -1,5 +1,5 @@
-from contacts_api import add_contact, edit_contact, delete_contact, get_contacts
-from lambda_responses import bad_request
+from .contacts_api import add_contact, edit_contact, delete_contact, get_contacts
+from .lambda_responses import bad_request
 
 
 def lambda_handler(event, context):
@@ -21,8 +21,8 @@ def lambda_handler(event, context):
 
 
 '''
-POST - https://rm9l6gpxpi.execute-api.us-east-1.amazonaws.com/dev/user/contacts
-GET - https://rm9l6gpxpi.execute-api.us-east-1.amazonaws.com/dev/user/contacts/{contact_id}
-PUT - https://rm9l6gpxpi.execute-api.us-east-1.amazonaws.com/dev/user/contacts/{contact_id}
-DELETE - https://rm9l6gpxpi.execute-api.us-east-1.amazonaws.com/dev/user/contacts/{contact_id}
+POST - https://yop9h6vc2j.execute-api.us-east-1.amazonaws.com/dev/user/contacts
+GET - https://yop9h6vc2j.execute-api.us-east-1.amazonaws.com/dev/user/contacts
+PUT - https://yop9h6vc2j.execute-api.us-east-1.amazonaws.com/dev/user/contacts/{contact_id}
+DELETE - https://yop9h6vc2j.execute-api.us-east-1.amazonaws.com/dev/user/contacts/{contact_id}
 '''
