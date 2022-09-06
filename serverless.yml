@@ -20,7 +20,7 @@ provider:
         - "dynamodb:PutItem"
         - "dynamodb:UpdateItem"
         - "dynamodb:DeleteItem"
-      Resource: "arn:aws:dynamodb:us-east-1:*:table/Contacts"
+      Resource: "arn:aws:dynamodb:us-east-1:*:table/*"
 
 
 package:
