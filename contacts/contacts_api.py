@@ -30,9 +30,10 @@ def generate_ddb_update_expression(body):
     return "".join(update_expression)[:-1], update_values
 
 
-def add_contact(request_body):
-    print("input to lambda :::::", request_body)
-    user_id = request_body['user_id']
+def add_contact(request):
+    print("input to lambda :::::", request)
+    user_id = request['user_id']
+    request_body = request["body"]
     first_name = request_body.get('first_name') or ""
     last_name = request_body.get('last_name') or ""
 
@@ -71,9 +72,9 @@ def edit_contact(request_body):
 
     return update_response()
 
-def get_contacts(request_body):
+def get_contacts(request):
     try:
-        created_by = request_body["user_id"]
+        created_by = request["user_id"]
         list_of_contacts = CONTACTS.query(
             IndexName='created_by-index',
             KeyConditionExpression=Key("created_by").eq(created_by),
