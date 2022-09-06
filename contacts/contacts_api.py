@@ -75,6 +75,7 @@ def get_contacts(request_body):
     try:
         created_by = request_body["user_id"]
         list_of_contacts = CONTACTS.query(
+            IndexName='created_by-index',
             KeyConditionExpression=Key("created_by").eq(created_by),
         )["Items"]
         return get_response(list_of_contacts)
