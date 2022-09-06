@@ -28,7 +28,7 @@ package:
 functions:
   contacts:
     handler: lambda_function.lambda_handler
-    module: contacts
+    # module: contacts
     package:
       include:
         - contacts/lambda_function.py
