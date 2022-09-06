@@ -64,7 +64,7 @@ functions:
             passThrough: WHEN_NO_MATCH
             template:
               application/json: '{
-                "action": "get"
+                "action": "get",
                 "contact_id": "$input.params("contact_id")",
                 "user_id": "$input.params("user_id")",
                 }'
