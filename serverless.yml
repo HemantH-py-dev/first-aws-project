@@ -10,16 +10,7 @@ provider:
   memorySize: 1024
   timeout: 30
   runtime: python3.8 
-
-
-package:
-  individually: true
-  patterns:
-    - "!node_modules/**"
-    - "!requirements.txt"
-    - "!package.json"
-
-iamRoleStatements:
+  iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:DescribeTable
@@ -29,6 +20,14 @@ iamRoleStatements:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+
+
+package:
+  individually: true
+  patterns:
+    - "!node_modules/**"
+    - "!requirements.txt"
+    - "!package.json"
 
 functions:
   contacts:
