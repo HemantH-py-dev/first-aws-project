@@ -66,7 +66,7 @@ functions:
               application/json: '{
                 "action": "get",
                 "contact_id": "$input.params("contact_id")",
-                "user_id": "$input.params("user_id")",
+                "user_id": "$input.params("user_id")"
                 }'
           response:
             headers:
@@ -97,9 +97,9 @@ functions:
             passThrough: WHEN_NO_MATCH
             template:
               application/json: '{
-                "action": "delete"
+                "action": "delete",
                 "user_id": "$input.params("user_id")",
-                "contact_id": "$input.params("contact_id")",
+                "contact_id": "$input.params("contact_id")"
                 }'
           response:
             headers:
