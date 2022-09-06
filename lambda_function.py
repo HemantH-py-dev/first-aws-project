@@ -1,5 +1,5 @@
-from .contacts_api import add_contact, edit_contact, delete_contact, get_contacts
-from .lambda_responses import bad_request
+from contacts.contacts_api import add_contact, edit_contact, delete_contact, get_contacts
+from contacts.lambda_responses import bad_request
 
 
 def lambda_handler(event, context):
